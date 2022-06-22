@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMstransactionsTable extends Migration
+class CreateCartDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateMstransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mstransactions', function (Blueprint $table) {
+        Schema::create('cart_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id');
-            $table->foreign('member_id')->references('id')->on('msmembers');
-            $table->date('date');
-
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateMstransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mstransactions');
+        Schema::dropIfExists('cart_details');
     }
 }

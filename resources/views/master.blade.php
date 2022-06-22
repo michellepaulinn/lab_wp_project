@@ -26,6 +26,7 @@
         }
         a{
             color: #374151ff !important;
+            text-decoration: none !important;
         }
         .logo-img{
             width: 8vh;
@@ -35,11 +36,19 @@
             height:7rem;
             object-fit: cover;
         }
+        .cart-img{
+            width: 10rem;
+        }
+        .sub{
+            align-items: flex-start;
+            /* background-color: yellow; */
+            color: grey;
+        }
     </style>
 </head>
 <body>
     <nav>
-        <div class="navbar bg-white shadow-sm">
+        <div class="navbar bg-white shadow-sm px-4">
             <div class="nav-detail d-flex gap-4 align-items-center">
                 <div class="logo">
                     <img src="{{asset('logo.png')}}" class="logo-img" alt="">

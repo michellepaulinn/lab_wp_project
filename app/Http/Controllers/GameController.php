@@ -2,18 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Msgame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class GameController extends Controller
 {
-       
-    //create + store
-    public function create(){
-        return view('insert');
+    //home
+    public function dashboard(){
+        //add logic for featured games (select raw)
+        $featured = Game::all();
+        //add logic for Hot games (select raw)
+        $hot = Game::all();
+        return view('welcome', ["featured"=>$featured, "hot"=>$hot]);
     }
-    public function store(Request $request){
+    //manageGame
+    public function manageGame(){
+        return view('manageGame');
+    }
+
+    //create + store
+    public function addGame(){
+        return view('addGame');
+    }
+
+    public function addProcess(Request $request){
         $validation = Validator::make($request->all(),
         [
             'title' => 'required',
@@ -23,26 +37,43 @@ class GameController extends Controller
             //validasi slides (blm : min 3 images nya gmn )
             'slides' => 'required|mimes:jpg,png,svg,jpeg',
             'description' => 'required|min:10'
-        ]
-        );
+        ],[
+                'required' => ':attribute wajib diisi',
+                'min'     => ':attribute minimal berisi :min karakter',
+                'max'     => ':attribute maksimal berisi :max karakter',
+                'email'   => ':harus diisi dengan alamat email yang valid',
+                'in'      => ':attribute yang dipilih tidak valid'       
+        ]);
+
         //save ke database
-    }
-    //view-update + update
-    public function viewUpdate(){
         
+        $games = new Game();
+        $games->gameName = $request->gameName;
+        $games->category_id = $request->category_id;
+        $games->price = $request->price;
+        $games->gameThumbnail = $request->gameThumbnail;
+        $games->description = $request->description;
+        $games->save();
     }
-    public function update(){
+    
+    //view-update + update
+    public function updateGame(){
+        return view('updateGame');
+    }
+
+    public function updateProcess(Request $req){
 
     }
+
     public function search(Request $req){
-        $games = Msgame::where('gameName', 'LIKE', "%$req->keyword%")->paginate(15);
+        $games = Game::where('gameName', 'LIKE', "%$req->keyword%")->paginate(15);
         return view('games',[
             "games" => $games,
         ]);
     }
 
-    public function detail($id ){
-        $game = Msgame::find($id);
+    public function detail($id){
+        $game = Game::find($id);
         return view('gameDetails', [
             "game" => $game
         ]);
@@ -52,9 +83,7 @@ class GameController extends Controller
     //  passing category ?
     }
     
-    // $albums = Album::where('name', 'LIKE', "%$req->keyword%")->paginate(4);
-    // // $albums = Album::where('name', 'LIKE', "%$req->keyword%")->simplePaginate(5);
-    // return view('albums', [
-    //     "albums" => $albums,
-    // ]);
+    public function removeGame($id){
+        
+    }
 }

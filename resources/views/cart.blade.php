@@ -3,33 +3,26 @@
 
 @section('content')
 
-<div>
-    <div class="sub">Your Cart</div>
+<div class="m-auto top-3 px-2 justify-content-center align-items-center" style="width:80%;">
+    <h5>Your Cart</h5>
     
-    <div class="games">
-        @foreach ($games as $game)
-            <div class="gameImage">
-                <img src="{{$game->gameThumbnail}}" alt="">
-            </div>
-            <div>
-                <div>{{$game->gameName}}</div>
-                <div class="sub">{{-- category name--}}</div>
-            </div>
-            <div>
-                <div class="sub">IDR {{$game->gamePrice}}</div>
-                <div class="btn"><button>REMOVE</button></div>
-            </div>
-        @endforeach
+    <div class="games w-100" >
         <div>
-            <div>Total</div>
-            <div class="sub">{{-- item counts --}} games</div>
+            @include('rowCards',['games'=>$games, 'cart'=>true])
         </div>
-        <div>IDR {{-- total price --}}</div>
+        <div class="m-3 px-3 card d-flex flex-row">
+            <div class="card-body flex-grow">
+                <div>Total</div>
+                <div class="sub">{{-- item counts --}} games</div>
+            </div>
+            <div class="align-self-center">IDR {{-- total price --}}</div>
+        </div>
     </div>
-
-    <div class="btn">
-        <button>CHECKOUT</button>
+    <div class="justify-content-right">
+        <a href="/" class="btn bg-navy text-light ">Check Out</a>
     </div>
+        
+    
 </div>
 
 @endsection

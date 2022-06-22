@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMsmembersTable extends Migration
+class CreateCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateMsmembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('msmembers', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-
-            $table->unsignedBigInteger('cart_id');
-            $table->foreign('cart_id')->references('id')->on('mscarts');
+            $table->foreignId('game_id');
 
             $table->softDeletes();
             $table->timestamps();
@@ -34,6 +29,6 @@ class CreateMsmembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msmembers');
+        Schema::dropIfExists('carts');
     }
 }

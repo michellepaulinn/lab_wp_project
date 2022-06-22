@@ -2,29 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MemberModel;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
-class MemberController extends Controller
+class UserController extends Controller
 {
-    //view -> dashboard (home), top features, hot, detail per game
-
-    public function dashboard(){
-        //home
-        return view('dashboard');
-    }
-
     public function register(){
         return view('register');
     }
-    
+
     public function registerProcess(Request $request){
         $validation = Validator::make($request->all(),
         [
             'name' => 'required',
-            'email' => 'required|email', //unique: //tanya cecenya unique apaan 
+            'email' => 'required|email|unique', //unique: //tanya cecenya unique apaan 
             'password' => 'required|min:8',
             'password2' => 'required_with:password|same:password' //pass samainnya bener kek gini 
         ]
@@ -36,7 +28,7 @@ class MemberController extends Controller
         }
 
         // save ke database
-        $newMember = new MemberModel();
+        $newMember = new User();
         $newMember->name = $request->name;
         $newMember->email = $request->email;
         //hash passwordnya
@@ -58,7 +50,7 @@ class MemberController extends Controller
         ]
         );
         //validasiin ke database
-        $membData = MemberModel::where('email', $request->email)->first(); //data di db
+        $membData = User::where('email', $request->email)->first(); //data di db
         //kalau gaada
         if($membData->fails()) { // ga tau null di sini tulis apa 
             //gada akunnya
@@ -71,11 +63,4 @@ class MemberController extends Controller
             // return view('dashboard')->with();
         }
     }
-
-    public function cart(){
-        //oper db
-        return view('cart');
-    }
-    
 }
-?>

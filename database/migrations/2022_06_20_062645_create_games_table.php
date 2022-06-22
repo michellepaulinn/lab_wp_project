@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMsgameSlidersTable extends Migration
+class CreateGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateMsgameSlidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('msgame_sliders', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('game_id');  
-            $table->foreign('game_id')->references('id')->on('msgames');
-            $table->string('sliderImage');
-
+            $table->string('gameName');
+            $table->foreignId('category_id');
+            $table->integer('price');
+            $table->string('gameThumbnail');
+            $table->longText('description');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ class CreateMsgameSlidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msgame_sliders');
+        Schema::dropIfExists('games');
     }
 }

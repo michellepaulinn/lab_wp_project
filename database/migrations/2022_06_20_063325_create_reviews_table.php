@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMsreviewsTable extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateMsreviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('msreviews', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id');
-            $table->foreign('member_id')->references('id')->on('msmembers');
-            $table->unsignedBigInteger('game_id');
-            $table->foreign('game_id')->references('id')->on('msgames');
+            $table->foreignId('user_id');
+            $table->foreignId('game_id');
             $table->boolean('recommended');
             $table->longText('isiReview');
 
@@ -34,6 +32,6 @@ class CreateMsreviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msreviews');
+        Schema::dropIfExists('reviews');
     }
 }

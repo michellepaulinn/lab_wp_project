@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\GameController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\AdminController;
-use App\Models\MemberModel;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\TransactionController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,24 +20,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //dashboard
-    return view('welcome');
-});
+Route::get('/', [GameController::class, 'dashboard']);
 
-Route::get('/register', [MemberController::class, 'register'] );
-Route::get('registerProcess', [MemberController::class, 'registerProcess']);
-Route::get('/login', [MemberController::class, 'login'] );
+Route::get('/register', [UserController::class, 'register'] );
+Route::post('/register-process', [UserController::class, 'registerProcess']);
+Route::get('/login', [UserController::class, 'login'] );
+Route::post('/login-process', [UserController::class, 'loginProcess']);
+
 Route::get('/search', [GameController::class, 'search']);
 Route::get('/game/{id}', [GameController::class, 'detail']);
-Route::post('/cart', [MemberController::class, 'cart']);
 Route::get('/game/manage', [GameController::class, 'manageGame']);
-Route::post('/game/add', [GameController::class, 'addGame']);
+Route::get('/game/add', [GameController::class, 'addGame']);
+Route::post('/game/add-process', [GameController::class, 'addProcess']);
 Route::get('/game/{id}/update', [GameController::class,'updateGame']);
-Route::get('/category/manage', [GameController::class, 'manageCategory']);
-Route::post('/category/add', [GameController::class, 'addCategory']);
-Route::get('/category/{id}/update', [GameController::class,'updateCategory']);
+Route::post('/game/{id}/update-process', [GameController::class,'updateProcess']);
+Route::post('/game/{id}/remove', [GameController::class,'removeGame']);
 
+Route::get('/category/add', [CategoryController::class, 'addCategory']);
+Route::get('/category/manage', [CategoryController::class, 'manageCategory']);
+Route::post('/category/add-process', [CategoryController::class, 'addProcess']);
+Route::get('/category/{id}/update', [CategoryController::class,'updateCategory']);
+Route::post('/category/{id}/update-process', [CategoryController::class,'updateProcess']);
 
+//add cart
+Route::post('add-cart', [CartController::class, 'addCart']);
+Route::get('/cart', [CartController::class, 'cart']);
+Route::post('/cart/{id}/remove', [CartController::class, 'removeCart']); //id cart detailnya
+
+Route::post('/check-out/{id}', [TransactionController::class, 'checkOut']);
+
+Route::post('/add-review', [ReviewController::class, 'addReview']);
 
 //Route::get('/dashboard', [MovieController::class, 'index']);
