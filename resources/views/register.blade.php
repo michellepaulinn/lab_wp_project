@@ -2,8 +2,8 @@
 @section('title', ' | Register')
 
 @section('content')
-    <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center">
-        <div class="bg-white p-4 w-25 rounded shadow">
+    <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center m-4">
+        <div class="bg-white p-4 w-25 rounded shadow m-4">
             <div>
                 <h1 class="text-center">Register</h1>
             </div>
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="password">Confirm Password</label><input type="password" class="form-control" name="password2" id="password2">
                     </div>
-                    <div class= "d-flex justify-content-between">
+                    <div class= "d-flex justify-content-between mt-2">
                         <a href="/login">Already Register? </a>
                         <input type="submit" class="btn bg-navy text-light" value="REGISTER">
                     </div>

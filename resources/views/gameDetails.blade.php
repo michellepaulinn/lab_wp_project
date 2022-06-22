@@ -16,7 +16,7 @@
               <a href="" class="btn bg-navy text-light">Add to Cart</a>
             </div>
         </div>
-
+        {{-- Gimana caranya masukin source ke carousel pake foreach? --}}
         <div class="slider flex-shrink" style="width:80%;">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="recc">
-        <div class="sub">More Like This</div>
+        <div class="sub-bold">More Like This</div>
         <div class="moreGames"> {{--musinya ini nampilin game yang kategorinya sama--}} 
             {{-- Di controllernya bikin logic kirim more 3 games w/o the same id as this one --}}
             {{-- @foreach($more as $m)
@@ -75,7 +75,7 @@
     </div>
     <div class="review">
         <div class="newReview rounded shadow-sm bg-white p-4">
-            <div class="sub">Leave A Review!</div>
+            <div class="sub-bold">Leave A Review!</div>
             <form action="">
                 <input type="radio" name="recc" id="yes">
                 <label for="ch">Reccomend</label>

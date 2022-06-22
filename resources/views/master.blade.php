@@ -44,6 +44,9 @@
             /* background-color: yellow; */
             color: grey;
         }
+        .sub-bold{
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
