@@ -15,7 +15,7 @@
             </div>
             <div class="align-self-center">
                 <a href="" class="text-light btn bg-navy">UPDATE</a>
-                <a href="" class="text-light btn btn-danger">REMOVE</a>
+                <a href="/category/delete/{{$ctg->id}}" class="text-light btn btn-danger" onclick="confirm('Are you sure?')">REMOVE</a>
             </div>
         </div>
         @endforeach

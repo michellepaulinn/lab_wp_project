@@ -47,6 +47,7 @@ Route::prefix('/category')->group(function() {
     Route::post('/add-process', [CategoryController::class, 'addProcess']);
     Route::get('/update/{id}', [CategoryController::class,'updateCategory']);
     Route::post('/update-process/{id}', [CategoryController::class,'updateProcess']);
+    Route::get('/delete/{id}', [CategoryController::class, 'deleteCategory']);
 });
 
 

@@ -8,7 +8,7 @@
                 <h3 class="text-center">Add Category</h3>
             </div>
             <div>
-                <form action="/game/add-process" method="post" enctype="multipart/form-data">
+                <form action="/category/add-process" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control" name="category" id="category" placeholder="Category">
@@ -18,5 +18,11 @@
                 </form>
             </div>
         </div>
+        @if ($errors->any())
+        {{-- {{ dd($errors->all()) }} --}}
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+        @endif
     </div>
 @endsection

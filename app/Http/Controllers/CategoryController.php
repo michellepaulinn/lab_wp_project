@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -12,7 +13,19 @@ class CategoryController extends Controller
     }
     
     public function addProcess(Request $request){
-        
+        $validation = Validator::make($request->all(),[
+            'category' => 'required|unique:categories,categoryName'
+        ]);
+
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation);
+        }
+        $newCategory = new Category();
+        $newCategory->categoryName = $request->category;
+        $newCategory->save();
+
+        return redirect('/category/manage');
+
     }
     
     public function manageCategory(){
@@ -26,6 +39,11 @@ class CategoryController extends Controller
 
     public function updateProcess(Request $request){
 
+    }
+
+    public function deleteCategory($id){
+        Category::destroy($id);
+        return redirect()->back();
     }
     
 }
