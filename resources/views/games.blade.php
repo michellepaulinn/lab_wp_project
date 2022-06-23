@@ -8,21 +8,9 @@
         <input type="text" class="form-control w-50 me-2" placeholder="Search.." name="keyword">
         <button class="btn bg-green" type="submit"><span class="material-icons">search</span></button>
     </form>
-    {{-- <div class="d-flex justify-content-center flex-wrap gap-2"> --}}
-      @foreach ($games as $game)
-        <div class="card text-dark m-2" style="width: 12rem;">
-          <img class="card-img" src="{{ asset('/images/'.$game->gameThumbnail)}}" alt="" >
-          <div class="card-body">
-            <h5 class="card-title"><b>{{$game->gameName}}</b></h5>
-            <p class="card-text">
-              <span>{{ $game->description }}</span>
-            </p>
-            <h6 class="card-title align-text-right"><b>{{$game->price}}</b></h6>
-            <a href="/game/{{$game->id}}" class="btn bg-navy text-light">View Games</a>
-          </div>
-        </div>
-      @endforeach
-    {{-- </div> --}}
+    <div class="d-flex justify-content-center flex-wrap " >
+      @include('columnCards', ['games'=>$games])
+    </div>
   
     
   </div>

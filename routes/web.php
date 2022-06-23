@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//view kurang navigasi halaman
+
 Route::get('/', [GameController::class, 'dashboard']); //view done
 
 Route::get('/register', [UserController::class, 'register'] ); //view done
