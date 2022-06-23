@@ -29,23 +29,22 @@ Route::post('/login-process', [UserController::class, 'loginProcess']);
 
 Route::get('/search', [GameController::class, 'search']);  //view done
 
-Route::get('/add-game', [GameController::class, 'addGame']);
-Route::post('/add-process', [GameController::class, 'addProcess']);
-Route::get('/manage-game', [GameController::class, 'manageGame']);
-
 Route::prefix('game')->group(function() {
-    Route::get('/{id}', [GameController::class, 'detail']);  //view done
-    Route::get('/{id}/update', [GameController::class,'updateGame']);
-    Route::post('/{id}/update-process', [GameController::class,'updateProcess']);
-    Route::post('/{id}/remove', [GameController::class,'removeGame']);
+    Route::get('/add', [GameController::class, 'addGame']); //View Done kecuali buat slider min 3
+    Route::post('/add-process', [GameController::class, 'addProcess']);
+    Route::get('/details/{id}', [GameController::class, 'detail']);  //view done kecuali slider
+    Route::get('/manage', [GameController::class, 'manageGame']); //View Done
+    Route::get('/update/{id}', [GameController::class,'updateGame']);
+    Route::post('/update-process/{id}', [GameController::class,'updateProcess']);
+    Route::post('/remove/{id}', [GameController::class,'removeGame']);
 });
 
 Route::prefix('/category')->group(function() {
-    Route::get('/add', [CategoryController::class, 'addCategory']); 
-    Route::get('/manage', [CategoryController::class, 'manageCategory']);
+    Route::get('/add', [CategoryController::class, 'addCategory']); //view done
+    Route::get('/manage', [CategoryController::class, 'manageCategory']); //view done
     Route::post('/add-process', [CategoryController::class, 'addProcess']);
-    Route::get('/{id}/update', [CategoryController::class,'updateCategory']);
-    Route::post('/{id}/update-process', [CategoryController::class,'updateProcess']);
+    Route::get('/update/{id}', [CategoryController::class,'updateCategory']);
+    Route::post('/update-process/{id}', [CategoryController::class,'updateProcess']);
 });
 
 

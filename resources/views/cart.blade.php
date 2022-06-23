@@ -8,7 +8,7 @@
     
     <div class="games w-100" >
         <div>
-            @include('rowCards',['games'=>$games, 'cart'=>true])
+            @include('rowCards',['games'=>$games, 'stat'=>'cart'])
         </div>
         <div class="m-2 px-3 card d-flex flex-row">
             <div class="card-body flex-grow">

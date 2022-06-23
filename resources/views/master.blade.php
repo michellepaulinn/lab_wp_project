@@ -47,6 +47,9 @@
         .sub-bold{
             font-weight: bold;
         }
+        .form-group{
+            margin-block: 0.5rem;
+        }
     </style>
 </head>
 <body>

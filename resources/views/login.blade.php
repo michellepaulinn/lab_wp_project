@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center m-4 pt-4">
-        <div class="bg-white m-4 p-4 w-25 rounded shadow">
+        <div class="bg-white m-4 p-4 rounded shadow">
             <div>
                 <h1 class="text-center">Login</h1>
             </div>
@@ -25,9 +25,9 @@
                         <input type="checkbox" class="form-check-input" name="rememberMe" id="rememberMe"><label for="rememberMe" class="form-check-label">Remember Me</label>
                         <br>
                     </div>
-                    <a href="/register">Don't have an account? Register Now!</a>
+                    <a href="/register" >Don't have an account? Register Now!</a>
                     <br>
-                    <input type="submit" class="btn bg-navy text-light" value="LOG IN">
+                    <input type="submit" class="btn bg-navy text-light my-2" value="LOG IN">
                 </form>
             </div>
         </div>

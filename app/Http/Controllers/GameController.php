@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
-use App\Models\Msgame;
+use App\Models\Game; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +18,8 @@ class GameController extends Controller
     }
     //manageGame
     public function manageGame(){
-        return view('manageGame');
+        $games = Game::all();
+        return view('manageGame',["games"=>$games]);
     }
 
     //create + store
@@ -73,6 +73,7 @@ class GameController extends Controller
     }
 
     public function detail($id){
+        // return "Game Details";
         $game = Game::find($id);
         return view('gameDetails', [
             "game" => $game
