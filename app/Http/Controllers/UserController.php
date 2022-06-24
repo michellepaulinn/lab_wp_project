@@ -33,11 +33,10 @@ class UserController extends Controller
         $newMember = new User();
         $newMember->name = $request->name;
         $newMember->email = $request->email;
-        //hash passwordnya
-
-        // $newMember->password = Hash::make($request->password);
+        //hash password
         $newMember->password = bcrypt($request->password);
-        // $newMember->password = $request->password;
+
+        $newMember->role = "Member";
         $newMember->save();
 
         return redirect('/'); // ke home
@@ -46,35 +45,6 @@ class UserController extends Controller
     public function login(){
         return view('login');
     }
-
-    // public function loginProcess(Request $request){
-    //     $validation = Validator::make($request->all(),
-    //     [
-    //         'email' => 'required|email', 
-    //         'password' => 'required|min:8'
-    //     ]
-    //     );
-    //     if($validation->fails()){
-    //         return redirect()->back()->withErrors($validation);
-    //     }
-    //     //validasiin ke database
-    //     $membData = User::where('email', $request->email)->first(); //data di db
-    //     //kalau gaada
-    //     if(! $membData) { // ga tau null di sini tulis apa 
-    //         return redirect()->back()->withErrors("You don't have an account yet");
-    //     }
-    //     else{
-    //         // $pass = Hash::make($request->password);
-    //         $pass = $request->password;
-    //         if (! Hash::check($pass, $membData->password)){
-    //             return redirect()->back()->withErrors('Password Mismatch');
-    //         }
-    //         else{ 
-    //             return redirect('/');
-    //         }
-    //     }
-        
-    // }
 
     public function loginProcess(Request $request){
         $credentials = $request->validate([
@@ -91,6 +61,16 @@ class UserController extends Controller
         return back()->withErrors([
             'errors' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+ 
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
     }
     
 

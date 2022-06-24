@@ -24,10 +24,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GameController::class, 'dashboard']); //view done
 
-Route::get('/register', [UserController::class, 'register'] ); //view done
+Route::get('/register', [UserController::class, 'register'] )->middleware('guest'); //view done
 Route::post('/register-process', [UserController::class, 'registerProcess']);
-Route::get('/login', [UserController::class, 'login'] );  //view done
+Route::get('/login', [UserController::class, 'login'] )->middleware('guest');  //view done
 Route::post('/login-process', [UserController::class, 'loginProcess']);
+Route::post('logout', [UserController::class, 'logout']);
 
 Route::get('/search', [GameController::class, 'search']);  //view done
 
