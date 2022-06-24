@@ -9,7 +9,7 @@
                 <h1 class="text-center">Login</h1>
             </div>
             <div>
-                <form action="/loginProcess" method="post" enctype="multipart/form-data">
+                <form action="/login-process" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -29,16 +29,19 @@
                     <br>
                     <input type="submit" class="btn bg-navy text-light my-2" value="LOG IN">
                 </form>
+                <div class="text-danger text-center">
+                    @if ($errors->any())
+                    {{-- {{ dd($errors->all()) }} --}}
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    @endif
+                </div>
             </div>
         </div>
     </div>
     
 
-    @if ($errors->any())
-    {{-- {{ dd($errors->all()) }} --}}
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
-    @endif
+    
 
  @endsection

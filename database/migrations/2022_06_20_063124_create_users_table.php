@@ -19,8 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->foreignId('cart_id');
-
             $table->softDeletes();
             $table->timestamps();
         });

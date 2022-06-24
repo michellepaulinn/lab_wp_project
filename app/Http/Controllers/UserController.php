@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -16,9 +17,9 @@ class UserController extends Controller
         $validation = Validator::make($request->all(),
         [
             'name' => 'required',
-            'email' => 'required|email|unique', //unique: //tanya cecenya unique apaan 
-            'password' => 'required|min:8',
-            'password2' => 'required_with:password|same:password' //pass samainnya bener kek gini 
+            'email' => 'required|email|unique:users,email', //unique: //tanya cecenya unique apaan 
+            'password' => 'required|min:8|confirmed',
+            // 'password2' => 'required_with:password|same:password' //pass samainnya bener kek gini 
         ]
         );
 
@@ -32,10 +33,11 @@ class UserController extends Controller
         $newMember->name = $request->name;
         $newMember->email = $request->email;
         //hash passwordnya
-        $newMember->password = $request->password;
+        $newMember->password = Hash::make($request->password);
+        // $newMember->password = $request->password;
         $newMember->save();
 
-        return redirect(); // ke home
+        return redirect('/'); // ke home
     }
 
     public function login(){
@@ -49,18 +51,25 @@ class UserController extends Controller
             'password' => 'required|min:8'
         ]
         );
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation);
+        }
         //validasiin ke database
         $membData = User::where('email', $request->email)->first(); //data di db
         //kalau gaada
-        if($membData->fails()) { // ga tau null di sini tulis apa 
-            //gada akunnya
-            //kasih alert -> "You don't have an account yet, register now !
+        if(! $membData) { // ga tau null di sini tulis apa 
+            return redirect()->back()->withErrors("You don't have an account yet");
         }
-        elseif ($membData['password'] != $request->password){
-            //incorrect password
+        else{
+            // $pass = Hash::make($request->password);
+            $pass = $request->password;
+            if (! Hash::check($pass, $membData->password)){
+                return redirect()->back()->withErrors('Password Mismatch');
+            }
+            else{ 
+                return redirect('/');
+            }
         }
-        else{ // berhasil login
-            // return view('dashboard')->with();
-        }
+        
     }
 }

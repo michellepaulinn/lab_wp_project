@@ -8,7 +8,7 @@
                 <h1 class="text-center">Register</h1>
             </div>
             <div>
-                <form action="/registerProcess" method="post" enctype="multipart/form-data">
+                <form action="/register-process" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label><input type="text" class="form-control" name="name" id="name">
@@ -20,24 +20,27 @@
                         <label for="password">Password</label><input type="password" class="form-control" name="password" id="password">
                     </div>
                     <div class="form-group">
-                        <label for="password">Confirm Password</label><input type="password" class="form-control" name="password2" id="password2">
+                        <label for="password">Confirm Password</label><input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
                     </div>
                     <div class= "d-flex justify-content-between mt-2">
                         <a href="/login">Already have an account? Login Now</a>
                         <input type="submit" class="btn bg-navy text-light" value="REGISTER">
                     </div>
                 </form>
+                <div class="text-center text-danger">
+                    @if ($errors->any())
+                    {{-- {{ dd($errors->all()) }} --}}
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    @endif
+                </div>
             </div>
+            
         </div>
     </div>
     
 
-    @if ($errors->any())
-    {{-- {{ dd($errors->all()) }} --}}
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
-    @endif
 
  @endsection
 
