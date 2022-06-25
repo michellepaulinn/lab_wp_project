@@ -53,45 +53,6 @@
     </style>
 </head>
 <body>
-    {{-- <nav>
-        
-        <div class="navbar bg-white shadow-sm px-4">
-            <div class="nav-detail d-flex gap-4 align-items-center">
-                <div class="logo">
-                    <img src="{{asset('logo.png')}}" class="logo-img" alt="">
-                </div>
-                <a href="/">Dashboard</a>
-                <a href="/cart">Cart</a>
-                @can('admin-nav')
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Admin
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-                @endcan
-            </div>
-            <div class="nav-profile">
-                @guest
-                    <h5>GUEST</h5>    
-                @endguest
-                @auth
-                <div class="d-flex">
-                    <h3>{{auth()->user()->name}}</h3>
-                    <form action="/logout" method="post">
-                        @csrf
-                        <button type="submit"><i class="bibi-box-arrow-right"></i></button>
-                    </form>
-                </div>
-                @endauth
-            </div>
-        </div>
-    </nav> --}}
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
         <div class="logo">
             <img src="{{asset('logo.png')}}" class="logo-img" alt="">
@@ -104,15 +65,14 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Cart</a>
             </li>
-            @can('admin-nav')
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
+            @can('admin')
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/game/manage">Manage Game</a>
+                    <a class="dropdown-item" href="/category/manage">Manage Category</a>
+                </div>
+                </li>
             @endcan
           </ul>
         </div>
