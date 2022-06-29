@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="thumbnail">Slider</label>
-                       <input type="file" class="form-control" name="slider" id="slider" placeholder="Slider">
+                       <input type="file" multiple class="form-control" name="slider" id="slider" placeholder="Slider">
                     </div>
                     <div class="form-group">
                         <textarea name="review" id="" cols="75" rows="5" placeholder="Description"></textarea><br>

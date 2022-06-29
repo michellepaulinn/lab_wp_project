@@ -35,15 +35,16 @@ class GameController extends Controller
             'category' => 'required',
             'price' => 'required|numeric',
             'thumbnail' => 'required|mimes:jpg,png,jpeg',
-            //validasi slides (blm : min 3 images nya gmn )
-            'slides' => 'required|mimes:jpg,png,svg,jpeg',
+            'slider' => 'required|min:3',
+            'slider.*'=>'mimes:jpg,png,svg,jpeg',
             'description' => 'required|min:10'
         ],[
-                'required' => ':attribute wajib diisi',
-                'min'     => ':attribute minimal berisi :min karakter',
-                'max'     => ':attribute maksimal berisi :max karakter',
-                'email'   => ':harus diisi dengan alamat email yang valid',
-                'in'      => ':attribute yang dipilih tidak valid'       
+                'required' => ':attribute must be filled',
+                'slider.min' => 'slider must contains minimal 3 files',
+                'min'     => ':attribute must contains minimal :min characters',
+                'max'     => ':attribute must contain max :max character',
+                'email'   => ':attribute must be filled with valid email address',
+                'in'      => ':attribute chosen is not valid'       
         ]);
 
         //save ke database
