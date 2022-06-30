@@ -2,7 +2,7 @@
     @foreach ($games as $game)
     <a href="/game/details/{{$game->id}}">
         <div class="card text-dark" style="width: 12rem;">
-           <img class="card-img" src="{{ asset('/images/'.$game->gameThumbnail)}}" alt="" >
+           <img class="card-img" src="{{ asset('/thumbnails/'.$game->gameThumbnail)}}" alt="" >
            <div class="card-body">
                <h5 class="card-title"><b>{{$game->gameName}}</b></h5>
                <p class="card-text">

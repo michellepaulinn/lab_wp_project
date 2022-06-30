@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,12 @@ class UserController extends Controller
 
         $newMember->role = "Member";
         $newMember->save();
+        $member_id = $newMember->id;
+
+        //make cart for every new member
+        $cart = new Cart();
+        $cart->user_id = $member_id;
+        $cart->save();
 
         return redirect('/'); // ke home
     }

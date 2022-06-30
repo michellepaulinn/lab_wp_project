@@ -13,9 +13,9 @@
         <div class="m-2 px-3 card d-flex flex-row">
             <div class="card-body flex-grow">
                 <div>Total</div>
-                <div class="sub">{{-- item counts --}} games</div>
+                <div class="sub">{{ count($cartDetails) }} games</div>
             </div>
-            <div class="align-self-center">IDR {{-- total price --}}</div>
+            <div class="align-self-center">IDR {{number_format($totalPrice)}}</div>
         </div>
     </div>
     <div class="align-self-end m-2">

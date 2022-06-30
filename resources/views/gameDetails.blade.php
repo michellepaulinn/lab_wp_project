@@ -3,17 +3,31 @@
 
 @section('content')
 
+@if (session('alert'))
+    <div class="alert alert-success">
+        {{ session('alert') }}
+    </div>
+@elseif (session('warning'))
+    <div class="alert alert-warning">
+        {{ session('warning') }}
+    </div>
+@endif
+
 <div class="justify-content-center m-auto py-4 "style="width:70%;">
     <div class="gameVisual d-flex flex-row m-4">
         <div class="card text-dark m-2 shadow-sm" style="width: 12rem;">
-            <img class="card-img" src="{{ asset('/images/'.$game->gameThumbnail)}}" alt="" >
+            <img class="card-img" src="{{ asset('/thumbnails/'.$game->gameThumbnail)}}" alt="" >
             <div class="card-body">
               <h5 class="card-title"><b>{{$game->gameName}}</b></h5>
               <p class="card-text">
                 <span>{{ $game->description }}</span>
               </p>
               <h6 class="card-title align-text-right"><b>{{$game->price}}</b></h6>
-              <a href="" class="btn bg-navy text-light">Add to Cart</a>
+              <form action="/add-cart" method="post">
+                    @csrf
+                    <input type="hidden" name="game_id" value="{{ $game->id }}">
+                    <button type="submit" class="btn bg-navy text-light">Add to Cart</button>
+              </form>
             </div>
         </div>
         {{-- Gimana caranya masukin source ke carousel pake foreach? --}}
@@ -25,15 +39,11 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
+                    @foreach($gameSliders as $slide)
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="{{ asset('/images/'.$game->gameThumbnail)}}" alt="First slide">
+                        <img class="d-block w-100" src="{{ asset('/sliders/'.$slide->sliderImage)}}" alt="First slide">
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{{ asset('/images/'.$game->gameThumbnail)}}" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{{ asset('/images/'.$game->gameThumbnail)}}" alt="Third slide">
-                    </div>
+                    @endforeach
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

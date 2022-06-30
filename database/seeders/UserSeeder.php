@@ -17,20 +17,20 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
-                'name'=>'Misel',
-                'email'=>'misel@gmail.com',
+                'name'=>'user1',
+                'email'=>'user1@gmail.com',
                 'password'=>bcrypt('user1234'),
                 'role'=>'Member'
             ],
             [
-                'name'=>'Zhan',
-                'email'=>'zhan@gmail.com',
-                'password'=>bcrypt('zhan1991'),
+                'name'=>'user2',
+                'email'=>'user2@gmail.com',
+                'password'=>bcrypt('user2234'),
                 'role'=>'Member'
             ],
             [
-                'name'=>'Tsukki Admin',
-                'email'=>'tsukki@admin.com',
+                'name'=>'Admin',
+                'email'=>'admin@test.com',
                 'password'=>bcrypt('admin1234'),
                 'role'=>'Admin'
             ],

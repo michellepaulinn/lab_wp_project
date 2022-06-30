@@ -15,7 +15,10 @@
             </div>
             <div class="align-self-center">
                 <a href="" class="text-light btn bg-navy">UPDATE</a>
-                <a href="/category/delete/{{$ctg->id}}" class="text-light btn btn-danger" onclick="confirm('Are you sure?')">REMOVE</a>
+                <form action="/game/remove/{{$ctg->id}}" method="post">
+                    @csrf
+                        <button  class="text-light btn btn-danger" onclick=" return confirm('Are you sure?')">REMOVE</button>
+                </form>
             </div>
         </div>
         @endforeach

@@ -15,7 +15,7 @@ class CartDetail extends Model
         return $this->belongsTo(Cart::class);
     }
     public function game(){
-        return $this->hasOne(Game::class);
+        return $this->belongsTo(Game::class, 'game_id');
     }
     
 }

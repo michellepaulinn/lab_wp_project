@@ -50,24 +50,37 @@ class GameController extends Controller
                 'mimes'   => 'file type is not supported'       
         ]);
 
-        dd($request->slider);
         if($validation->fails()){
             return redirect()->back()->withErrors($validation);
         }
         //save ke database
         
+        $thumbnail = $request->file('thumbnail');
+        $thumbnailName = $thumbnail->getClientOriginalName();
+        
+        
         $games = new Game();
         $games->gameName = $request->title;
         $games->category_id = $request->category;
         $games->price = $request->price;
-        // $games->gameThumbnail = $request->thumbnail;
+        $games->gameThumbnail = $thumbnailName;
         $games->description = $request->description;
+
+        $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+
         $games->save();
+        // dd($request->slider);
         foreach($request->slider as $slide){
+            // $slideImage = $slide->file('slider');
+            $slideName = $slide->getClientOriginalName();
             $gameSlider = new GameSlider();
             $gameSlider->game_id = $games->id;
-            // $gameSlider->sliderImage = 
+            $gameSlider->sliderImage = $slideName;
+            $slide->move(public_path('sliders'), $slideName);
+            $gameSlider->save();
         }
+
+        return redirect('/game/manage');
     }
     
     //view-update + update
@@ -89,11 +102,13 @@ class GameController extends Controller
     public function detail($id){
         $game = Game::find($id);
         return view('gameDetails', [
-            "game" => $game
+            "game" => $game,
+            "gameSliders" => $game->gameSliders
         ]);
     }
     
     public function removeGame($id){
-        
+        $rem= Game::find($id)->delete();
+        return redirect('/game/manage');
     }
 }

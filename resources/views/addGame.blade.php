@@ -30,7 +30,7 @@
                         <input type="file" class="form-control" name="thumbnail" id="thumbnail">
                     </div>
                     <div class="input-group">
-                        <label class="input-group-text" for="thumbnail">Slider</label>
+                        <label class="input-group-text" for="slider[]">Slider</label>
                         <input type="file" multiple class="form-control" name="slider[]" id="slider">
                     </div>
                     
