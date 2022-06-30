@@ -1,9 +1,9 @@
 <div>
     @foreach ($games as $game)
         <div class="card mx-2 flex-row p-2">
-            <!-- <div>
+            <div>
                 <img src="{{asset('/thumbnails/'.$game->gameThumbnail)}}" class="card-img-left cart-img rounded" alt="...">
-            </div> -->
+            </div>
             <div class="card-body ml-auto flex-grow">
                 <a href="/game/details/{{$game->id}}">
                     <h5 class="card-title"><b>{{$game->gameName}}</b></h5>
@@ -18,7 +18,11 @@
                 @endif
                 <div class="d-flex">
                 @if($stat === 'cart')
-                    <a href="" class="text-light btn btn-danger">REMOVE</a>
+                    <form action="/cart/remove" method="post">
+                        @csrf
+                        <input type="hidden" name="game_id" value="{{ $game->id }}">
+                        <button type="submit" class="text-light btn btn-danger">REMOVE</button>
+                    </form>
                 @elseif($stat === 'manage')
                     <a href="" class="text-light btn bg-navy">UPDATE</a>
                     <form action="/game/remove/{{$game->id}}" method="post">
