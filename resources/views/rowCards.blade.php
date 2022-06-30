@@ -14,7 +14,7 @@
                 @if($game->price === 0)
                 <h6 class="card-title align-text-right"><b>FREE</b></h6>
                 @else
-                <h6 class="card-title align-text-right"><b>IDR {{$game->price}}</b></h6>
+                <h6 class="card-title align-text-right"><b>IDR {{number_format( $game->price)}}</b></h6>
                 @endif
                 <div>
                 @if($stat === 'cart')
@@ -22,7 +22,6 @@
                 @elseif($stat === 'manage')
                     <a href="" class="text-light btn bg-navy">UPDATE</a>
                     <a href="" class="text-light btn btn-danger">REMOVE</a>
-                    
                 @endif
                     {{-- @elseif --}}
 

@@ -10,36 +10,47 @@
             <div>
                 <form action="/game/add-process" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="gameTitle" id="gameTitle" placeholder="Title">
+                    <div class="form-group input-group">
+                        <input type="text" class="form-control" value="{{ old('title')}}" name="title" id="title" placeholder="Title">
+                    </div>
+                    <div class="form-group input-group">
+                        {{-- <label for="category" class="input-group-prepend input-group-text">Category</label> --}}
+                        <select id="category" class="form-control" name="category" placeholder="Category">
+                            <option disabled selected placeholder="Category">Category</option>
+                            @foreach ($category as $ctg)
+                                <option value="{{$ctg->id}}">{{$ctg->categoryName}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        {{-- Tanya, categorynya boleh pake dropdown ga? --}}
-                        <input type="text" class="form-control" name="category" id="category" placeholder="Category">
-                    </div>
-                    <div class="form-group">
-                        {{-- <p class="bg-secondary">IDR</p> --}}
                         <input type="number" class="form-control" name="price" id="price" placeholder="Price">
                     </div>
-                    <div class="form-group">
-                        <label for="thumbnail">Thumbnail</label>
-                        <input type="file" class="form-control" name="thumbnail" id="thumbnail" placeholder="Thumbnail">
+                    <div class="input-group mb-2">
+                        <label class="input-group-text" for="thumbnail">Thumbnail</label>
+                        <input type="file" class="form-control" name="thumbnail" id="thumbnail">
                     </div>
-                    <div class="form-group">
-                        <label for="thumbnail">Slider</label>
-                       <input type="file" multiple class="form-control" name="slider" id="slider" placeholder="Slider">
+                    <div class="input-group">
+                        <label class="input-group-text" for="thumbnail">Slider</label>
+                        <input type="file" multiple class="form-control" name="slider[]" id="slider">
                     </div>
+                    
                     <div class="form-group">
-                        <textarea name="review" id="" cols="75" rows="5" placeholder="Description"></textarea><br>
+                        <textarea name="description" id="description" cols="75" rows="5"  placeholder="Description"></textarea><br>
                     </div>
-
-
-
-
                     <br>
                     <input type="submit" class="btn bg-navy text-light" value="ADD GAME">
                 </form>
             </div>
+
+            <div class="text-center text-danger">
+                @if ($errors->any())
+                {{-- {{ dd($errors->all()) }} --}}
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                @endif
+            </div>
+
         </div>
     </div>
 @endsection

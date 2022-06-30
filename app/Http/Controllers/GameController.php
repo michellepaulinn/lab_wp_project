@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game; 
+use App\Models\Category;
+use App\Models\Game;
+use App\Models\GameSlider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +14,7 @@ class GameController extends Controller
     //home
     public function dashboard(){
         //add logic for featured games (select raw)
-        $featured = Game::all();
+        $featured = Game::take(5)->get();
         //add logic for Hot games (select raw)
         $hot = Game::all();
         return view('welcome', ["featured"=>$featured, "hot"=>$hot]);
@@ -25,7 +27,8 @@ class GameController extends Controller
 
     //create + store
     public function addGame(){
-        return view('addGame');
+        $category = Category::all();
+        return view('addGame',["category"=>$category]);
     }
 
     public function addProcess(Request $request){
@@ -44,18 +47,27 @@ class GameController extends Controller
                 'min'     => ':attribute must contains minimal :min characters',
                 'max'     => ':attribute must contain max :max character',
                 'email'   => ':attribute must be filled with valid email address',
-                'in'      => ':attribute chosen is not valid'       
+                'mimes'   => 'file type is not supported'       
         ]);
 
+        dd($request->slider);
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation);
+        }
         //save ke database
         
         $games = new Game();
-        $games->gameName = $request->gameName;
-        $games->category_id = $request->category_id;
+        $games->gameName = $request->title;
+        $games->category_id = $request->category;
         $games->price = $request->price;
-        $games->gameThumbnail = $request->gameThumbnail;
+        // $games->gameThumbnail = $request->thumbnail;
         $games->description = $request->description;
         $games->save();
+        foreach($request->slider as $slide){
+            $gameSlider = new GameSlider();
+            $gameSlider->game_id = $games->id;
+            // $gameSlider->sliderImage = 
+        }
     }
     
     //view-update + update

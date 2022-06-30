@@ -18,7 +18,7 @@
     <div >
         <h2 class="text-left">Hot</h2>
     </div>
-    @include('rowCards', ['games'=>$hot, 'stat'=>'cart'])
+    @include('rowCards', ['games'=>$hot, 'stat'=>'home'])
 </div>
 
 
