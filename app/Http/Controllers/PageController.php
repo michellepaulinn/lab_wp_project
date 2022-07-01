@@ -24,11 +24,13 @@ class PageController extends Controller
              ->orderBy('qty','desc')
              ->take(5)
              ->get();
-
-        // dd($hot);
-        $featured = Game::take(5)->get();
-        //add logic for Hot games (select raw)
-        // $hot = Game::all();
+        $featured = Game::selectRaw('games.id, games.gameName, games.category_id, games.price, games.gameThumbnail, games.description, count(reviews.id) AS rates')
+             ->join('reviews', 'reviews.game_id','=','games.id')
+             ->whereRaw('reviews.recommended = true')
+             ->groupBy('games.id','games.category_id', 'games.price', 'games.gameThumbnail', 'games.description', 'games.gameName')
+             ->orderBy('rates','desc')
+             ->take(5)
+             ->get();
         return view('welcome', ["featured"=>$featured, "hot"=>$hot]);
     }
 }
