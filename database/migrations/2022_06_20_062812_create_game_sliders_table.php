@@ -15,7 +15,7 @@ class CreateGameSlidersTable extends Migration
     {
         Schema::create('game_sliders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id');  
+            $table->foreignId('game_id')->constrained()->onUpdate('cascade')->onDelete('cascade');  
             $table->string('sliderImage');
 
             $table->softDeletes();

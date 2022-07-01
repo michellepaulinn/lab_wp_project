@@ -15,8 +15,8 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('game_id');
+            $table->foreignId('user_id')->onDelete('cascade');
+            $table->foreignId('game_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('recommended');
             $table->longText('isiReview');
 
