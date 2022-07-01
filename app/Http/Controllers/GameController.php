@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Validator;
 class GameController extends Controller
 {
     //home
-    public function dashboard(){
-        //add logic for featured games (select raw)
-        $featured = Game::take(5)->get();
-        //add logic for Hot games (select raw)
-        $hot = Game::all();
-        return view('welcome', ["featured"=>$featured, "hot"=>$hot]);
-    }
+    // public function dashboard(){
+    //     //add logic for featured games (select raw)
+    //     $featured = Game::take(5)->get();
+    //     //add logic for Hot games (select raw)
+    //     $hot = Game::all();
+    //     return view('welcome', ["featured"=>$featured, "hot"=>$hot]);
+    // }
     //manageGame
     public function manageGame(){
         $games = Game::all();

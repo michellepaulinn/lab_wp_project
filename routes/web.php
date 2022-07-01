@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\RoleCheck;
@@ -31,7 +32,7 @@ Route::middleware([VerifyLogout::class])->group(function(){
     Route::post('/login-process', [UserController::class, 'loginProcess']);
 });
 
-Route::get('/', [GameController::class, 'dashboard'])->name('home'); //view done
+Route::get('/', [PageController::class, 'dashboard'])->name('home'); //view done
 
 Route::middleware([VerifyLogin::class])->group(function(){
     Route::post('/add-cart', [CartController::class, 'addCart']);

@@ -1,9 +1,10 @@
 <div>
+    {{-- {{dd($games )}} --}}
     @foreach ($games as $game)
         <div class="card mx-2 flex-row p-2">
-            <!-- <div>
+            <div>
                 <img src="{{asset('/thumbnails/'.$game->gameThumbnail)}}" class="card-img-left cart-img rounded" alt="...">
-            </div> -->
+            </div>
             <div class="card-body ml-auto flex-grow">
                 <a href="/game/details/{{$game->id}}">
                     <h5 class="card-title"><b>{{$game->gameName}}</b></h5>

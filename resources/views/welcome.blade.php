@@ -9,6 +9,7 @@
 </div>
 
 <div class="m-4">
+    {{-- {{dd($hot)}} --}}
    <div class="container justify-content-center m-auto px-4">
      {{-- Featured --}}
      <div>
