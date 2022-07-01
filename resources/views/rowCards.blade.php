@@ -19,7 +19,11 @@
                 @endif
                 <div class="d-flex">
                 @if($stat === 'cart')
-                    <a href="" class="text-light btn btn-danger">REMOVE</a>
+                    <form action="/cart/remove" method="post">
+                        @csrf
+                        <input type="hidden" name="game_id" value="{{ $game->id }}">
+                        <button type="submit" class="text-light btn btn-danger">REMOVE</button>
+                    </form>
                 @elseif($stat === 'manage')
                     <a href="" class="text-light btn bg-navy">UPDATE</a>
                     <form action="/game/remove/{{$game->id}}" method="post">

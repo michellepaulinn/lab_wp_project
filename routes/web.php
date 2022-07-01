@@ -37,7 +37,7 @@ Route::get('/', [PageController::class, 'dashboard'])->name('home'); //view done
 Route::middleware([VerifyLogin::class])->group(function(){
     Route::post('/add-cart', [CartController::class, 'addCart']);
     Route::get('/cart', [CartController::class, 'cart']); //view done
-    Route::post('/cart/{id}/remove', [CartController::class, 'removeCart']); //id cart detailnya
+    Route::post('/cart/remove', [CartController::class, 'remove']); //id cart detailnya
     Route::post('/check-out/{id}', [TransactionController::class, 'checkOut']);
     Route::post('/add-review', [ReviewController::class, 'addReview']);
     Route::post('logout', [UserController::class, 'logout']);

@@ -21,6 +21,6 @@ class Game extends Model
         return $this->hasMany(Review::class);
     }
     public function cartDetails(){
-        return $this->hasMany(cartDetail::class);
+        return $this->hasMany(cartDetail::class, 'game_id');
     }
 }

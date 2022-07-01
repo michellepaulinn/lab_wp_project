@@ -29,12 +29,22 @@ class CartController extends Controller
     }
 
     public function cart(){
-        $games = Game::all();
-        return view('cart', ['games'=>$games]);
+        $cart = Cart::where('user_id', Auth::user()->id)->first();
+        $cartDetail = CartDetail::where('cart_id', $cart->id)->get();
+ 
+        $totalPrice = 0;
+        foreach($cartDetail as $cd){ $totalPrice = $totalPrice + $cd->game->price; }
+
+        $gameInCD = array();
+        for($x = 0; $x < count($cartDetail); $x++){
+            $gameInCD[$x] = $cd->game;
+        }
+ 
+        return view('cart', ["cartDetails" => $cartDetail, "totalPrice" => $totalPrice, "games" => $gameInCD]);
     }
     
     public function remove(Request $req){
         $cartDetail = CartDetail::where('game_id', $req->game_id)->delete();
-        return $this->viewCart();
+        return $this->cart();
     }
 }
