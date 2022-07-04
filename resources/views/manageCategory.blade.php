@@ -13,11 +13,11 @@
             <div class="card-body ml-auto flex- align-self-center">
                 <h5 class="card-title">{{$ctg->categoryName}}</h5>
             </div>
-            <div class="align-self-center">
-                <a href="" class="text-light btn bg-navy">UPDATE</a>
+            <div class="align-self-center d-flex">
+                <a href="/category/update/{{$ctg->id}}" class="mx-2 text-light btn bg-navy">UPDATE</a>
                 <form action="/category/remove/{{$ctg->id}}" method="post">
                     @csrf
-                        <button  class="text-light btn btn-danger" onclick=" return confirm('Are you sure?')">REMOVE</button>
+                        <button  class=" mx-2 text-light btn btn-danger" onclick=" return confirm('Are you sure?')">REMOVE</button>
                 </form>
             </div>
         </div>

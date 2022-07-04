@@ -21,7 +21,7 @@ class GameController extends Controller
     // }
     //manageGame
     public function manageGame(){
-        $games = Game::all();
+        $games = Game::paginate(10);
         return view('manageGame',["games"=>$games]);
     }
 
@@ -95,7 +95,8 @@ class GameController extends Controller
     }
 
     public function search(Request $req){
-        $games = Game::where('gameName', 'LIKE', "%$req->keyword%")->paginate(15);
+        $games = Game::where('gameName', 'LIKE', "%$req->keyword%")->paginate(5);
+        
         return view('games',[
             "games" => $games,
         ]);

@@ -18,7 +18,7 @@ class CategoryController extends Controller
         ]);
 
         if($validation->fails()){
-            return redirect()->back()->withErrors($validation);
+            return back()->with(['warning' => 'This category already exists!']);
         }
         $newCategory = new Category();
         $newCategory->categoryName = $request->category;
@@ -33,12 +33,25 @@ class CategoryController extends Controller
         return view('manageCategory', ["category"=>$category]);
     }
     
-    public function updateCategory(){
-        return view('updateCategory');
+    public function updateCategory($id){
+        $ctg = Category::find($id);
+        return view('updateCategory', ['ctg'=>$ctg]);
     }
 
-    public function updateProcess(Request $request){
+    public function updateProcess($id, Request $request){
+        $validation = Validator::make($request->all(),[
+            'category' => 'required|unique:categories,categoryName'
+        ]);
+        $ctg = Category::where('categoryName', $request->category)->firstOrFail();
 
+        if($validation->fails() && $ctg->id != $id){
+            return back()->with(['warning' => 'This category already exists!']);
+        }
+        $category = Category::find($id);
+        $category->categoryName = $request->category;
+        $category->save();
+
+        return redirect('/category/manage');
     }
 
     public function deleteCategory($id){

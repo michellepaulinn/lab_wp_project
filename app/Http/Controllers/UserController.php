@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -16,19 +15,18 @@ class UserController extends Controller
     }
 
     public function registerProcess(Request $request){
-        $validation = Validator::make($request->all(),
+        $validation = $request->validate(
         [
             'name' => 'required',
-            'email' => 'required|email:dns|unique:users,email', //unique: //tanya cecenya unique apaan 
+            'email' => 'required|email:dns|unique:users,email', 
             'password' => 'required|min:8|confirmed',
-            // 'password2' => 'required_with:password|same:password' //pass samainnya bener kek gini 
         ]
         );
 
         //kalau validasi gagal
-        if($validation->fails()){
-            return redirect()->back()->withErrors($validation);
-        }
+        // if($validation->fails()){
+        //     return redirect()->back()->withErrors($validation);
+        // }
 
         // save ke database
         $newMember = new User();
@@ -65,9 +63,11 @@ class UserController extends Controller
             return redirect()->intended('/');
         }
  
-        return back()->withErrors([
-            'errors' => 'The provided credentials do not match our records.',
+        return back()->with([
+            'danger' => 'The provided credentials do not match our records.',
         ]);
+
+
     }
 
     public function logout(Request $request){

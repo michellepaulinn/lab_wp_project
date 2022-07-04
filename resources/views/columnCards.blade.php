@@ -1,7 +1,7 @@
 <div class="d-flex flex-row justify-content-around flex-wrap">
     @foreach ($games as $game)
     <a href="/game/details/{{$game->id}}">
-        <div class="card text-dark" style="width: 12rem;">
+        <div class="card text-dark mx-2" style="width: 12rem;">
            <img class="card-img" src="{{ asset('/thumbnails/'.$game->gameThumbnail)}}" alt="" >
            <div class="card-body">
                <h5 class="card-title"><b>{{$game->gameName}}</b></h5>

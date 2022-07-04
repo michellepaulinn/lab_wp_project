@@ -1,7 +1,12 @@
 @extends('master')
-@section('title', ' | Add Game')
+@section('title', ' | Add Category')
 
 @section('content')
+@if (session('warning'))
+    <div class="alert alert-danger">
+        {{ session('warning') }}
+    </div>
+@endif
     <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center m-4 pt-4">
         <div class="bg-white m-4 p-4 rounded shadow w-50">
             <div>
@@ -18,11 +23,5 @@
                 </form>
             </div>
         </div>
-        @if ($errors->any())
-        {{-- {{ dd($errors->all()) }} --}}
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
-        @endif
     </div>
 @endsection

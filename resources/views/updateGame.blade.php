@@ -5,7 +5,7 @@
     <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center m-4 pt-4">
         <div class="bg-white m-4 p-4 rounded shadow">
             <div>
-                <h3 class="text-center">Add Game</h3>
+                <h3 class="text-center">Update Game</h3>
             </div>
             <div>
                 <form action="/game/add-process" method="post" enctype="multipart/form-data">
