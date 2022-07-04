@@ -12,10 +12,10 @@ class CartDetail extends Model
     protected $guarded=['id'];
 
     public function cart(){
-        return $this->belongsTo(Cart::class, 'cart_id');
+        return $this->belongsTo(Cart::class);
     }
     public function game(){
-        return $this->belongsTo(Game::class, 'game_id');
+        return $this->belongsTo(Game::class);
     }
     
 }

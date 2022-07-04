@@ -22,7 +22,7 @@
               <p class="card-text">
                 <span>{{ $game->description }}</span>
               </p>
-              <h6 class="card-title align-text-right"><b>{{$game->price}}</b></h6>
+              <h6 class="card-title align-text-right"><b>{{ number_format($game->price)}}</b></h6>
               <form action="/add-cart" method="post">
                     @csrf
                     <input type="hidden" name="game_id" value="{{ $game->id }}">
@@ -40,8 +40,8 @@
                 </ol>
                 <div class="carousel-inner">
                     @foreach($gameSliders as $slide)
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="{{ asset('/sliders/'.$slide->sliderImage)}}" alt="First slide">
+                    <div class="carousel-item ">
+                        <img class="d-block w-100" id="imgslide" src="{{ asset('/sliders/'.$slide)}}" alt="First slide">
                     </div>
                     @endforeach
                 </div>

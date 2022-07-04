@@ -84,8 +84,10 @@ class GameController extends Controller
     }
     
     //view-update + update
-    public function updateGame(){
-        return view('updateGame');
+    public function updateGame($id){
+        $game = Game::find($id);
+        $category = Category::all();
+        return view('updateGame', ['game'=>$game, 'category'=>$category]);
     }
 
     public function updateProcess(Request $req){
@@ -101,9 +103,11 @@ class GameController extends Controller
 
     public function detail($id){
         $game = Game::find($id);
+        $sliders = $game->gameSliders()->get('slider_image')->toArray();
+        // dd($sliders);
         return view('gameDetails', [
             "game" => $game,
-            "gameSliders" => $game->gameSliders
+            "gameSliders" => $sliders
         ]);
     }
     

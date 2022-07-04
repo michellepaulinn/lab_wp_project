@@ -25,7 +25,7 @@
                         <button type="submit" class="text-light btn btn-danger">REMOVE</button>
                     </form>
                 @elseif($stat === 'manage')
-                    <a href="" class="text-light btn bg-navy">UPDATE</a>
+                    <a href="/game/update/{{$game->id}}" class="text-light btn bg-navy">UPDATE</a>
                     <form action="/game/remove/{{$game->id}}" method="post">
                     @csrf
                         <button  class="text-light btn btn-danger" onclick=" return confirm('Are You Sure?')">REMOVE</button>

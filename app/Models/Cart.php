@@ -16,6 +16,6 @@ class Cart extends Model
     }
 
     public function cartDetails(){
-        return $this->hasMany(cartDetails::class, 'cart_id');
+        return $this->hasMany(cartDetail::class, 'cart_id');
     }
 }

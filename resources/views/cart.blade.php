@@ -13,13 +13,17 @@
         <div class="m-2 px-3 card d-flex flex-row">
             <div class="card-body flex-grow">
                 <div>Total</div>
-                <div class="sub">{{ count($cartDetails) }} games</div>
+                <div class="sub">{{ count($cart->cartDetails) }} games</div>
             </div>
             <div class="align-self-center">IDR {{number_format($totalPrice)}}</div>
         </div>
     </div>
     <div class="align-self-end m-2">
-        <a href="/" class="btn bg-navy text-light ">Check Out</a>
+        <form action="/check-out/{{$cart->id}}" method="post">
+            @csrf
+            <input type="hidden" name="total" id="total" value ="{{$totalPrice}}">
+            <input type="submit" class="btn bg-navy text-light" value="Check Out">
+        </form>
     </div>
         
     
