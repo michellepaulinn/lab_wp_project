@@ -2,6 +2,15 @@
 @section('title', ' | Cart')
 
 @section('content')
+@if (session('alert'))
+    <div class="alert alert-success">
+        {{ session('alert') }}
+    </div>
+@elseif (session('warning'))
+    <div class="alert alert-warning">
+        {{ session('warning') }}
+    </div>
+@endif
 
 <div class="m-auto top-3 px-2 pb-4 d-flex flex-column" style="width:80%;">
     <h3 class="m-4">Your Cart</h5>

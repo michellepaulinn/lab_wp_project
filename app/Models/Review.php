@@ -9,9 +9,13 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $guarded=['id'];
+    protected $guarded=[];
 
     public function game(){
         return $this->belongsTo(Game::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

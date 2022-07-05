@@ -44,7 +44,7 @@ class UserController extends Controller
         $cart->user_id = $member_id;
         $cart->save();
 
-        return redirect('/'); // ke home
+        return redirect('/login'); // ke home
     }
 
     public function login(){
@@ -56,8 +56,9 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        $remember_me = $request->has('rememberMe') ? true : false;
  
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember_me)) {
             $request->session()->regenerate();
  
             return redirect()->intended('/');

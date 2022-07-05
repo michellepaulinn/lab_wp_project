@@ -16,5 +16,7 @@ class User extends Model implements \Illuminate\Contracts\Auth\Authenticatable
     public function cart(){
         return $this->hasOne(Cart::class);
     }
-    
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
 }

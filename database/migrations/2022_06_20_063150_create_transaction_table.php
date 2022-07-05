@@ -16,7 +16,8 @@ class CreateTransactionTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->date('date');
+            $table->foreignId('game_id');
+            $table->date('purchased_at');
 
             $table->softDeletes();
             $table->timestamps();

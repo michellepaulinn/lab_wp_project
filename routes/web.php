@@ -39,7 +39,7 @@ Route::middleware([VerifyLogin::class])->group(function(){
     Route::get('/cart', [CartController::class, 'cart']); //view done
     Route::post('/cart/remove', [CartController::class, 'remove']); //id cart detailnya
     Route::post('/check-out/{id}', [TransactionController::class, 'checkOut']);
-    Route::post('/add-review', [ReviewController::class, 'addReview']);
+    Route::post('/add-review/{id}', [ReviewController::class, 'addReview']);
     Route::post('logout', [UserController::class, 'logout']);
 });
 

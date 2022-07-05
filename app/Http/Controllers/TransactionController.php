@@ -11,19 +11,22 @@ class TransactionController extends Controller
 {
     public function checkOut($id, Request $req){
         $cart = Cart::find($id);
-        $newTransaction = new Transaction();
-        $newTransaction->user_id = auth()->user()->id;
-        $newTransaction->date = now();
-        $newTransaction->save();
 
-        foreach($cart->cartDetails as $cd){
-            $td = new TransactionDetail();
-            $td->transaction_id = $newTransaction->id;
-            $td->game_id = $cd->game->id;
-            $td->save();
+        if($cart->cartDetails->count() === 0){
+            return back()->with('warning', 'You don\'t have any games yet');
         }
 
-        dd($newTransaction->transactionDetails);
+        foreach($cart->cartDetails as $cd){
+            $trans = new Transaction();
+            $trans->user_id = auth()->user()->id;
+            $trans->game_id = $cd->game->id;
+            $trans->purchased_at = date("Y-m-d");
+            $trans->save();
+            // $cd->delete();
+        }
+        $cart->cartDetails()->delete();
+
+        return back()->with('alert', 'Transaction Success!');
     }
     
 }

@@ -17,23 +17,78 @@ class TransactionSeeder extends Seeder
         Transaction::insert([
             [
                 'user_id' => 2,
-                'date' => '2022-06-30'
+                'game_id' => 5,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 2,
+                'game_id' => 4,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 2,
+                'game_id' => 3,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 2,
+                'game_id' => 2,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 2,
+                'game_id' => 1,
+                'purchased_at' => '2022-07-03',
             ],
             [
                 'user_id' => 3,
-                'date' => '2022-06-30'
+                'game_id' => 5,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 3,
+                'game_id' => 4,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 3,
+                'game_id' => 3,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 3,
+                'game_id' => 2,
+                'purchased_at' => '2022-07-03',
             ],
             [
                 'user_id' => 4,
-                'date' => '2022-06-30'
+                'game_id' => 5,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 4,
+                'game_id' => 4,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 4,
+                'game_id' => 3,
+                'purchased_at' => '2022-07-03',
             ],
             [
                 'user_id' => 5,
-                'date' => '2022-06-30'
+                'game_id' => 5,
+                'purchased_at' => '2022-07-03',
+            ],
+            [
+                'user_id' => 5,
+                'game_id' => 4,
+                'purchased_at' => '2022-07-03',
             ],
             [
                 'user_id' => 6,
-                'date' => '2022-06-30'
+                'game_id' =>5,
+                'purchased_at' => '2022-07-03',
             ],
         ]);
     }

@@ -17,8 +17,8 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->onDelete('cascade');
             $table->foreignId('game_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->boolean('recommended');
-            $table->longText('isiReview');
+            $table->boolean('recommended')->nullable();
+            $table->longText('isiReview')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

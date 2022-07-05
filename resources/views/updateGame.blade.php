@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', ' | Add Game')
+@section('title', ' | Update Game')
 
 @section('content')
     <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center m-4 pt-4">
@@ -8,7 +8,7 @@
                 <h3 class="text-center">Update Game</h3>
             </div>
             <div>
-                <form action="/game/add-process" method="post" enctype="multipart/form-data">
+                <form action="/game/update-process/{{ $game->id }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group input-group">
                         <input type="text" class="form-control" value="{{$game->gameName}}" name="title" id="title" placeholder="Title">

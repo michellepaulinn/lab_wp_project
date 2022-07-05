@@ -54,13 +54,13 @@ class ReviewSeeder extends Seeder
             [
                 'user_id' => 2,
                 'game_id' => 2,
-                'recommended' => true,
+                'recommended' => false,
                 'isiReview' => 'Jadi ini contoh review ygy'
             ],
             [
                 'user_id' => 2,
                 'game_id' => 3,
-                'recommended' => true,
+                'recommended' => false,
                 'isiReview' => 'Jadi ini contoh review ygy'
             ],
             [

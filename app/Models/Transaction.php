@@ -14,7 +14,7 @@ class Transaction extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function transactionDetails(){
-        return $this->hasMany(TransactionDetail::class);
+    public function games(){
+        return $this->hasMany(Game::class);
     }
 }
