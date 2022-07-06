@@ -13,9 +13,9 @@
     </div>
 @endif
 
-<div class="justify-content-center m-auto py-4 "style="width:70%;">
-    <div class="gameVisual d-flex flex-row m-4">
-        <div class="card text-dark m-2 shadow-sm" style="width: 12rem;">
+<div class="justify-content-center m-auto py-4 col-8">
+    <div class="gameVisual d-flex flex-row my-4">
+        <div class="card text-dark my-2 me-4 shadow-sm col-3">
             <img class="card-img" src="{{ asset('/thumbnails/'.$game->gameThumbnail)}}" alt="" >
             <div class="card-body">
               <h5 class="card-title"><b>{{$game->gameName}}</b></h5>
@@ -36,20 +36,11 @@
                 @php $i = 0; $x = 'active' @endphp
                 @foreach ($gameSliders as $slider)
                 @php if($i == 0) $x = 'active'; else $x = '';  @endphp
-                    <div class="carousel-item {{$x}}">
+                    <div class="carousel-item c-img {{$x}}">
                         <img src="{{ asset('/sliders/'.$slider->slider_image)}}" class="d-block w-100" alt="Image Slider {{$i}}">
                     </div>
                     @php $i++; @endphp
                 @endforeach
-                {{-- <div class="carousel-item active">
-                    <img src="{{asset('/sliders/valorant1.jpg')}}" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="{{asset('/sliders/valorant2.jpg')}}" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="{{asset('/sliders/valorant3.jpg')}}" class="d-block w-100" alt="...">
-                  </div> --}}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -124,9 +115,9 @@
             </div>
         <div class="reviews my-4">
             <h5>Reviews</h5>
-            <div class="d-flex flex-wrap">
+            <div class="d-flex flex-wrap gap-2">
                 @foreach ($reviews as $review)
-                <div class="card text-dark card m-2 shadow-sm p-4" style="width: 17rem;">
+                <div class="card text-dark card shadow-sm p-4" style="width:17rem;">
                     {{-- mskin ke div card-body  --}}
                     {{-- // username --}}
                     <div class="card-title">

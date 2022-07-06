@@ -33,11 +33,16 @@
         }
         .card-img{
             width:100%;
-            height:7rem;
+            height:8rem;
             object-fit: cover;
         }
         .cart-img{
             width: 10rem;
+        }
+        .c-img{
+            width:100%;
+            height:30vw;
+            object-fit: cover;
         }
         .sub{
             align-items: flex-start;
