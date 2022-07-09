@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -27,6 +28,11 @@ class TransactionController extends Controller
         $cart->cartDetails()->delete();
 
         return back()->with('alert', 'Transaction Success!');
+    }
+
+    public function getSuccessTransaction(){ //for API
+        $transactions = Transaction::where('user_id', Auth::user()->id)->get();
+        return response(['message' => 'Success', 'data' => $transactions]);
     }
     
 }

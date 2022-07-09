@@ -37,14 +37,16 @@ class UserController extends Controller
 
         $newMember->role = "Member";
         $newMember->save();
-        $member_id = $newMember->id;
+        $token = $newMember->createToken('API Token')->accessToken;
 
         //make cart for every new member
+        $member_id = $newMember->id;
         $cart = new Cart();
         $cart->user_id = $member_id;
         $cart->save();
 
-        return redirect('/login'); // ke home
+        return response(['message' => 'Success', 'data' => $newMember, 'access_token' => $token], 200);
+        //return redirect('/login'); // ke home
     }
 
     public function login(){
@@ -59,16 +61,16 @@ class UserController extends Controller
         $remember_me = $request->has('rememberMe') ? true : false;
  
         if (Auth::attempt($credentials, $remember_me)) {
-            $request->session()->regenerate();
- 
-            return redirect()->intended('/');
+            // $request->session()->regenerate();
+            $token = auth()->user()->createToken('API Token')->accessToken;
+            return response(['message' => 'Success', 'data' => auth()->user(), 'access_token' => $token], 200);
+            // return redirect()->intended('/');
         }
  
-        return back()->with([
-            'danger' => 'The provided credentials do not match our records.',
-        ]);
-
-
+        return response(['error' => 'Invalid Credentials'], 403);
+        // return back()->with([
+        //     'danger' => 'The provided credentials do not match our records.',
+        // ]);
     }
 
     public function logout(Request $request){

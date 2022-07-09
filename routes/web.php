@@ -44,7 +44,8 @@ Route::middleware([VerifyLogin::class])->group(function(){
 });
 
 
-Route::get('/search', [GameController::class, 'search']);  //view done
+Route::get('/search', [GameController::class, 'search']);  //view done 
+// Route::get('/successTrans', [TransactionController::class, 'getSuccessTransaction']);
 
 Route::prefix('game')->group(function() {
     Route::middleware([RoleCheck::class])->group(function (){
@@ -68,3 +69,5 @@ Route::prefix('/category')->group(function() {
         Route::post('/remove/{id}', [CategoryController::class, 'deleteCategory']);
     });
 });
+
+
