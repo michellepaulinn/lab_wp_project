@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\GameSlider;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,7 +30,7 @@ class GameController extends Controller
             'title' => 'required',
             'category' => 'required',
             'price' => 'required|numeric',
-            'thumbnail' => 'required|mimes:jpg,png,jpeg',
+            'thumbnail' => 'required|mimes:jpg,png,jpeg,svg',
             'slider' => 'required|min:3',
             'slider.*'=>'mimes:jpg,png,svg,jpeg',
             'description' => 'required|min:10'
@@ -67,7 +68,7 @@ class GameController extends Controller
             $slideName = $slide->getClientOriginalName();
             $gameSlider = new GameSlider();
             $gameSlider->game_id = $games->id;
-            $gameSlider->sliderImage = $slideName;
+            $gameSlider->slider_image = $slideName;
             $slide->move(public_path('sliders'), $slideName);
             $gameSlider->save();
         }
@@ -88,7 +89,7 @@ class GameController extends Controller
             'title' => 'required',
             'category' => 'required',
             'price' => 'required|numeric',
-            'thumbnail' => 'required|mimes:jpg,png,jpeg',
+            'thumbnail' => 'required|mimes:jpg,png,jpeg,svg',
             'slider' => 'required|min:3',
             'slider.*'=>'mimes:jpg,png,svg,jpeg',
             'description' => 'required|min:10'
@@ -106,11 +107,16 @@ class GameController extends Controller
         }
         //save ke database
         
+        
         $thumbnail = $request->file('thumbnail');
         $thumbnailName = $thumbnail->getClientOriginalName();
         
-        
         $games = Game::findOrFail($id);
+
+        $destination = 'thumbnails'.$games->gameThumbnail;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
         $games->gameName = $request->title;
         $games->category_id = $request->category;
         $games->price = $request->price;
@@ -119,14 +125,17 @@ class GameController extends Controller
 
         $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
 
-        $games->save();
+        $games->update();
         // dd($request->slider);
+        foreach($games->gameSliders as $slide){
+            $slide->delete();
+        }
+
         foreach($request->slider as $slide){
-            // $slideImage = $slide->file('slider');
             $slideName = $slide->getClientOriginalName();
             $gameSlider = new GameSlider();
             $gameSlider->game_id = $games->id;
-            $gameSlider->sliderImage = $slideName;
+            $gameSlider->slider_image = $slideName;
             $slide->move(public_path('sliders'), $slideName);
             $gameSlider->save();
         }
