@@ -41,7 +41,7 @@ class ApiController extends Controller
         $cart->user_id = $member_id;
         $cart->save();
 
-        return response(['message' => 'Success', 'data' => $newMember, 'access_token' => $token], 200);
+        return response(['data' => $newMember, 'access_token' => $token], 200);
         //return redirect('/login'); // ke home
     }
 
@@ -55,7 +55,7 @@ class ApiController extends Controller
         if (Auth::attempt($credentials, $remember_me)) {
             // $request->session()->regenerate();
             $token = auth()->user()->createToken('API Token')->accessToken;
-            return response(['message' => 'Success', 'data' => auth()->user(), 'access_token' => $token], 200);
+            return response(['data' => auth()->user(), 'access_token' => $token], 200);
             // return redirect()->intended('/');
         }
  
