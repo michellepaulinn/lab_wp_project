@@ -28,11 +28,5 @@ class TransactionController extends Controller
         $cart->cartDetails()->delete();
 
         return back()->with('alert', 'Transaction Success!');
-    }
-
-    public function getSuccessTransaction(){ //for API
-        $transactions = Transaction::where('user_id', Auth::user()->id)->get();
-        return response(['message' => 'Success', 'data' => $transactions]);
-    }
-    
+    } 
 }

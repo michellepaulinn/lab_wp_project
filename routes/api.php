@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register',[UserController::class, 'registerProcess']);
-Route::post('/login',[UserController::class, 'loginProcess']);
+Route::post('/register',[ApiController::class, 'registerProcess']);
+Route::post('/login',[ApiController::class, 'loginProcess']);
 
-Route::post('/transactions',[TransactionController::class, 'getSuccessTransaction'])->middleware("auth:api");
+Route::get('/transactions',[ApiController::class, 'getSuccessTransaction'])->middleware("auth:api");

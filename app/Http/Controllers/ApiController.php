@@ -3,17 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class ApiController extends Controller
 {
-    public function register(){
-        return view('register');
-    }
-
     public function registerProcess(Request $request){
         $validation = $request->validate(
         [
@@ -37,6 +33,7 @@ class UserController extends Controller
 
         $newMember->role = "Member";
         $newMember->save();
+        $token = $newMember->createToken('API Token')->accessToken;
 
         //make cart for every new member
         $member_id = $newMember->id;
@@ -44,11 +41,8 @@ class UserController extends Controller
         $cart->user_id = $member_id;
         $cart->save();
 
-        return redirect('/login'); // ke home
-    }
-
-    public function login(){
-        return view('login');
+        return response(['message' => 'Success', 'data' => $newMember, 'access_token' => $token], 200);
+        //return redirect('/login'); // ke home
     }
 
     public function loginProcess(Request $request){
@@ -59,24 +53,20 @@ class UserController extends Controller
         $remember_me = $request->has('rememberMe') ? true : false;
  
         if (Auth::attempt($credentials, $remember_me)) {
-            //$request->session()->regenerate();
-            return redirect()->intended('/');
+            // $request->session()->regenerate();
+            $token = auth()->user()->createToken('API Token')->accessToken;
+            return response(['message' => 'Success', 'data' => auth()->user(), 'access_token' => $token], 200);
+            // return redirect()->intended('/');
         }
  
-        return back()->with([
-            'danger' => 'The provided credentials do not match our records.',
-        ]);
+        return response(['error' => 'Invalid Credentials'], 403);
+        // return back()->with([
+        //     'danger' => 'The provided credentials do not match our records.',
+        // ]);
     }
 
-    public function logout(Request $request){
-        Auth::logout();
- 
-        $request->session()->invalidate();
-    
-        $request->session()->regenerateToken();
-    
-        return redirect('/');
+    public function getSuccessTransaction(){ //for API
+        $transactions = Transaction::where('user_id', Auth::user()->id)->get();
+        return response(['data' => $transactions]);
     }
-    
-
 }
