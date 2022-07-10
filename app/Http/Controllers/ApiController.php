@@ -53,7 +53,7 @@ class ApiController extends Controller
         $remember_me = $request->has('rememberMe') ? true : false;
  
         if (Auth::attempt($credentials, $remember_me)) {
-            // $request->session()->regenerate();
+            //$request->session()->regenerate();
             $token = auth()->user()->createToken('API Token')->accessToken;
             return response(['data' => auth()->user(), 'access_token' => $token], 200);
             // return redirect()->intended('/');

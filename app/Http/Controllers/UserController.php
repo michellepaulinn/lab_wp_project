@@ -59,7 +59,7 @@ class UserController extends Controller
         $remember_me = $request->has('rememberMe') ? true : false;
  
         if (Auth::attempt($credentials, $remember_me)) {
-            //$request->session()->regenerate();
+            $request->session()->regenerate();
             return redirect()->intended('/');
         }
  
