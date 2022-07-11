@@ -56,7 +56,9 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
         $remember_me = $request->has('rememberMe') ? true : false;
+        Auth::setRememberDuration(2880); //2 days
  
         if (Auth::attempt($credentials, $remember_me)) {
             $request->session()->regenerate();
