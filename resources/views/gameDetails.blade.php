@@ -20,7 +20,7 @@
             <div class="card-body">
               <h5 class="card-title"><b>{{$game->gameName}}</b></h5>
               <p class="card-text">
-                <span>{{ $game->description }}</span>
+                <span class="fs-sm">{{ $game->description }}</span>
               </p>
               <h6 class="card-title align-text-right"><b>{{ number_format($game->price)}}</b></h6>
               <form action="/add-cart" method="post">
@@ -60,7 +60,7 @@
         </div>
         <div class="releaseDate">
             <div class="sub">Release Date</div>
-            <div > <strong>{{ $game->createdAt }}</strong> </div>
+            <div > <strong>{{ $game->created_at->format('Y-M-d') }}</strong> </div>
         </div>
         <div class="revs">
             <div class="sub">All Reviews</div>

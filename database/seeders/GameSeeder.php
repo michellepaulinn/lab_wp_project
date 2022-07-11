@@ -23,7 +23,8 @@ class GameSeeder extends Seeder
                 'gameThumbnail' => 'game1.jpg',
                 'description' => 'Counter-Strike: Global Offensive (CS: GO) expands upon the team-based action gameplay that it pioneered when it was launched 19 years ago. CS: GO features new maps, characters, weapons, and game modes, and delivers updated versions of the classic CS content (de_dust2, etc.).',
                 'created_at' => now(),
-                'updated_at' => now()            ],
+                'updated_at' => now()            
+            ],
             [
                 'gameName'=> 'Apex Legends',
                 'category_id'=>2,

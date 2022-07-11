@@ -38,7 +38,7 @@
                         <textarea name="description" id="description" cols="75" rows="5"  placeholder="Description"></textarea><br>
                     </div>
                     <br>
-                    <input type="submit" class="btn bg-navy text-light" value="ADD GAME">
+                    <input type="submit" class="btn bg-navy text-light" value="UPDATE GAME">
                 </form>
             </div>
 
