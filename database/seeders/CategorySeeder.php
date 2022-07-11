@@ -15,7 +15,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::insert([
-            ['categoryName' => 'action']
+            ['categoryName' => 'Action RPG'],
+            ['categoryName' => 'Shooter'],
+            ['categoryName' => 'Fighting'],
+            ['categoryName' => 'Sports and Racing'],
+            ['categoryName' => 'Adventure'],
         ]);
     }
 }
