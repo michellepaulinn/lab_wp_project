@@ -21,13 +21,7 @@ class CartController extends Controller
                 return redirect()->back()->with(['warning' => 'You have bought this game']);
             }
         }
-
-        foreach($cartDetails as $cd){
-            if($cd->game_id == $req->game_id){
-                return redirect()->back()->with(['warning' => 'Game has been added']);
-            }
-        }
-        
+       
         foreach($cartDetails as $cd){
             if($cd->game_id == $req->game_id){
                 return redirect()->back()->with(['warning' => 'Game has been added']);
