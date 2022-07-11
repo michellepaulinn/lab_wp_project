@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartDetail;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,20 @@ class CartController extends Controller
         $cart = Cart::where('user_id', Auth::user()->id)->first();
 
         $cartDetails = CartDetail::where('cart_id', $cart->id)->get();
+        $transactions = Transaction::where('user_id', Auth::user()->id)->get();
+
+        foreach($transactions as $trans){
+            if($trans->game_id == $req->game_id){
+                return redirect()->back()->with(['warning' => 'You have bought this game']);
+            }
+        }
+
+        foreach($cartDetails as $cd){
+            if($cd->game_id == $req->game_id){
+                return redirect()->back()->with(['warning' => 'Game has been added']);
+            }
+        }
+        
         foreach($cartDetails as $cd){
             if($cd->game_id == $req->game_id){
                 return redirect()->back()->with(['warning' => 'Game has been added']);
