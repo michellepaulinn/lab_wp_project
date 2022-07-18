@@ -41,14 +41,13 @@ class CartController extends Controller
         $cartDetail = CartDetail::with('game')->where('cart_id', $cart->id)->get();
         // dd($cartDetail);
         $totalPrice = 0;
+        $gameInCD = array();
+        $x = 0;
         foreach($cartDetail as $cd){ 
             // dd($cd->game);
-            $totalPrice = $totalPrice + $cd->game->price; 
-        }
-
-        $gameInCD = array();
-        for($x = 0; $x < count($cartDetail); $x++){
             $gameInCD[$x] = $cd->game;
+            $totalPrice = $totalPrice + $cd->game->price; 
+            $x++;
         }
  
         return view('cart', ["cart" => $cart, "totalPrice" => $totalPrice, "games" => $gameInCD]);
