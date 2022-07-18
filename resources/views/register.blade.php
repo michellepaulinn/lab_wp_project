@@ -20,28 +20,28 @@
                 <form action="/register-process" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-floating my-2">
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" required name="name" id="name">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" required name="name" id="name" value="{{ old('name') }}">
                         <label for="name">Name</label>
                         @error('name')
-                            <div class="invalid-feedback">
-                                {{$message}}
+                            <div class="text-danger">
+                                Invalid Name
                             </div>
                         @enderror
                     </div>
                     <div class="form-floating mb-2">
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" required name="email" id="email">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" required name="email" id="email" value="{{ old('email') }}">
                         <label for="email">Email</label>
                         @error('email')
-                            <div class="invalid-feedback">
-                                {{$message}}
+                            <div class="text-danger">
+                                Invalid Email
                             </div>
                         @enderror
                     </div>
                     <div class="form-floating mb-2">
                         <input type="password" class="form-control @error('password') is-invalid @enderror" required name="password" id="password">
                         <label for="password">Password</label>
-                        @error('email')
-                            <div class="invalid-feedback">
+                        @error('password')
+                            <div class="text-danger">
                                 {{$message}}
                             </div>
                         @enderror
@@ -50,7 +50,7 @@
                         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" required name="password_confirmation" id="password_confirmation">
                         <label for="password">Confirm Password</label>
                         @error('password_confirmation')
-                            <div class="invalid-feedback">
+                            <div class="text-danger">
                                 {{$message}}
                             </div>
                         @enderror
